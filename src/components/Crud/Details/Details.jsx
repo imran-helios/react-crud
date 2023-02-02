@@ -17,6 +17,7 @@ const Details = () => {
             <div className="user_details">
                 <h1 className="d_title">User Details</h1>
                 <div className="user_data">
+                    <img className="user_img" src={stData?.photo} alt="" />
                     <p>ID: {stData?.id}</p>
                     <p>Name:- {stData?.name}</p>
                     <p>Phone:- {stData?.phone}</p>

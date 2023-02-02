@@ -10,8 +10,11 @@ const Crud = () => {
   const [id, setId] = useState()
   const [values, setValues] = useState({
     name: "",
-    phone: ""
+    phone: "",
+    photo: null
   })
+
+  console.log(values);
 
   const getData = () => {
     axios.get('http://127.0.0.1:8000/stuinfo/').then((res) => {

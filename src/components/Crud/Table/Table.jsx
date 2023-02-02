@@ -3,7 +3,6 @@ import { FaRegEye, FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Table = (props) => {
-
   useEffect(() => {
     props.getData()
   }, []);
@@ -17,12 +16,17 @@ const Table = (props) => {
         :
         <div className="table" id="results">
           <div className="theader">
+            <div className="table_header">Image</div>
             <div className="table_header">Name</div>
             <div className="table_header">Phone</div>
             <div className="table_header">Action</div>
           </div>
           {props.stData?.map(data =>
             <div key={data.id} className="table_row">
+              <div className="table_small">
+                <div className="table_cell">Image</div>
+                <div className="table_cell"><img className="user_img" src={data.photo} alt="" /></div>
+              </div>
               <div className="table_small">
                 <div className="table_cell">Name</div>
                 <div className="table_cell">{data.name}</div>
