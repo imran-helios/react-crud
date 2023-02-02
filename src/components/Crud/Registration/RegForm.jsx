@@ -30,20 +30,26 @@ const RegForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
+    const form  = e.target
+
+    let formData = new FormData()
+    formData.append('name', props.values.name)
+    formData.append('phone', props.values.phone)
+    formData.append('photo', props.values.photo)
+
+
     if (props.isEdit) {
       fetch(`http://127.0.0.1:8000/updatestu/${props.id}`, {
         method: 'PATCH',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify(props.values)
+        body: formData
       }).then(res => res.json())
         .then(data => {
           props.getData()
           props.setIsEdit(false)
           props.setValues({
             name: '',
-            phone: ''
+            phone: '',
+            photo: null
           })
           setFocused(false)
         })
@@ -51,27 +57,28 @@ const RegForm = (props) => {
     } else {
       fetch('http://127.0.0.1:8000/stucreate/', {
         method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify(props.values)
+        body: (formData)
       })
         .then(res => res.json())
         .then(data => {
+          console.log(data);
           props.getData()
           props.setValues({
             name: '',
-            phone: ''
+            phone: '',
+            photo: null
           })
           setFocused(false)
         })
     }
+    form.reset()
   }
 
   const handleChange = (e) => {
+   const new_value =  e.target.type === "file" ? e.target.files[0] : e.target.value
     props.setValues({
       ...props.values,
-      [e.target.name]: e.target.value
+      [e.target.name]: new_value
     })
   }
   return (
@@ -90,6 +97,7 @@ const RegForm = (props) => {
             setFocused={setFocused}
           />
         )}
+        <input name = 'photo' onChange={handleChange} type="file" required />
         <button className="add_user_btn" type="submit">Submit</button>
       </form>
     </div>

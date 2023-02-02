@@ -21,6 +21,12 @@
     border-right: 1px solid #b3c5df;
     padding-right: 40px;
 }
+
+.user_img{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
 .inputfield input{
     padding: 10px;
     display: block;
